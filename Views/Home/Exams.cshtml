@@ -1,0 +1,42 @@
+﻿@inherits System.Web.Mvc.WebViewPage
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Экзамены</title>
+</head>
+<body>
+	<div>
+		<h3 align="center">Результаты экзаменов</h3>
+		<h2 align="center">Экзаменов сдано: @ViewBag.ExamsCount</h2>
+		<table align="center">
+			<tr>
+				<td width="30" align="center"><p><b>Дата</b></p></td>
+				<td width="250" align="center"><p><b>Дисциплина</b></p></td>
+				<td width="30" align="center"><p><b>Оценка</b></p></td>
+			</tr>
+
+			@if (ViewBag.Exams != null)
+			{
+				foreach (var exam in ViewBag.Exams)
+				{
+					<tr>
+						<td align="center"><p>@exam.ExamDate.ToShortDateString()</p></td>
+						<td align="center"><p>@exam.DisciplineName</p></td>
+						<td align="center"><p>@exam.MarkValue</p></td>
+					</tr>
+				}
+			}
+			else
+			{
+				<h1>Список пуст!</h1>
+			}
+		</table>
+	</div>
+</body>
+</html>

@@ -20,6 +20,11 @@ namespace AVLabWeb.DbWork.Entities
 		public int DisciplineId { get; set; }
 
 		/// <summary>
+		/// Название предмета.
+		/// </summary>
+		public string DisciplineName { get; set; }
+
+		/// <summary>
 		/// Оценка за экзамен.
 		/// </summary>
 		public int MarkValue { get; set; }

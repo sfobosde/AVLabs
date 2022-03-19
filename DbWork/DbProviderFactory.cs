@@ -41,6 +41,13 @@ namespace AVLabWeb.DbWork
 		public abstract List<Student> GetStudentsList();
 
 		/// <summary>
+		/// Получить данные о сданых экзаменах студента.
+		/// </summary>
+		/// <param name="StudentId"> Id студента. </param>
+		/// <returns> Список экзаменов. </returns>
+		public abstract List<Mark> GetStudentExams(int StudentId);
+
+		/// <summary>
 		/// Подключение к БД с использованием connectionString.
 		/// </summary>
 		/// <param name="connectionString"> Данные для подключения. </param>

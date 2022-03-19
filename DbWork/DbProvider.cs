@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Data.OleDb;
 using System.Data;
 
 namespace AVLabWeb.DbWork
@@ -46,6 +44,48 @@ namespace AVLabWeb.DbWork
 			}
 			catch
 			{
+				return null;
+			}
+		}
+
+		/// <summary>
+		/// Получить данные о сданых экзаменах студента.
+		/// </summary>
+		/// <param name="StudentId"> Id студента. </param>
+		/// <returns> Список экзаменов. </returns>
+		public override List<Mark> GetStudentExams(int StudentId)
+		{
+			var sqlRequest = "SELECT * " +
+				"FROM Оценки " +
+				"INNER JOIN Предметы " +
+				"ON Оценки.Код_предмета = Предметы.Код_предмета " +
+				$"WHERE Код_студента = {StudentId} ";
+
+			try
+			{
+				var examsTable = GetDataSet(sqlRequest, "Оценки").Tables["Оценки"];
+
+				var linqQuery = from exam in examsTable.AsEnumerable()
+								orderby exam.ItemArray[2]
+								select exam;
+
+				var examsList = new List<Mark>();
+
+				foreach (var exam in linqQuery)
+				{
+					examsList.Add(new Mark()
+					{
+						ExamDate = Convert.ToDateTime(exam["Дата_экзамена"]),
+						MarkValue = (int)exam["Оценка"],
+						DisciplineName = (string)exam["Название_предмета"]
+					});
+				}
+
+				return examsList;
+			}
+			catch (Exception e)
+			{
+				var mes = e.Message;
 				return null;
 			}
 		}

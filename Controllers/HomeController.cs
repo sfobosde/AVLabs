@@ -20,12 +20,25 @@ namespace AVLabWeb.Controllers
         /// Главная страница. Выводит список студентов.
         /// </summary>
         /// <returns> Страница со списком студентов. </returns>
-        [HttpGet]
         public ActionResult Index()
         {
             ViewBag.Students = DbProvider.GetStudentsList().AsEnumerable();
 
             return View();
         }
+
+        /// <summary>
+        /// Получение данных о сданых экзаменах студента по id.
+        /// </summary>
+        /// <param name="StudentId"> id студента. </param>
+        /// <returns> Страница с данным о экзаменах студента. </returns>
+        [HttpGet]
+        public ActionResult Exams(int id)
+		{
+            var examsList = DbProvider.GetStudentExams(id);
+            ViewBag.Exams = examsList.AsEnumerable();
+            ViewBag.ExamsCount = examsList.Count();
+            return View();
+		}
     }
 }

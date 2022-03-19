@@ -110,9 +110,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DbWork\DbProvider.cs" />
+    <Compile Include="DbWork\DbProviderFactory.cs" />
+    <Compile Include="DbWork\Entities\Discipline.cs" />
+    <Compile Include="DbWork\Entities\Mark.cs" />
+    <Compile Include="DbWork\Entities\Specialities.cs" />
+    <Compile Include="DbWork\Entities\Student.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IDbProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

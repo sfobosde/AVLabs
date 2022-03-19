@@ -1,7 +1,40 @@
-﻿
+﻿@inherits System.Web.Mvc.WebViewPage
 @{
-    ViewBag.Title = "View";
+	Layout = null;
 }
 
-<h2>View</h2>
+<!DOCTYPE html>
 
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Выбор</title>
+</head>
+<body>
+	<div>
+		<h3 align="center">Список студентов</h3>
+		<table align="center">
+			<tr>
+				<td width="30" align="center"><p><b>ID</b></p></td>
+				<td width="150" align="center"><p><b>ФИО</b></p></td>
+
+			</tr>
+
+			@if (ViewBag.Students != null)
+			{
+				foreach (var student in ViewBag.Students)
+				{
+					<tr>
+						<td align="center"><p>@student.StudentId</p></td>
+						<td align="center"><p><a href="/Home/ChooseStudent/@student.StudentId">@student.SurnameNP</a></p></td>
+					</tr>
+				}
+			}
+			else
+			{
+				<h1>Список пуст!</h1>
+			}
+		</table>
+	</div>
+</body>
+</html>

@@ -57,7 +57,7 @@ namespace AVLabWeb.DbWork.Entities
 		/// <summary>
 		/// Номер группы.
 		/// </summary>
-		public int GroupNum { get; set; }
+		public string GroupNum { get; set; }
 
 		/// <summary>
 		/// Курс.

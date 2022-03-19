@@ -61,6 +61,8 @@ namespace AVLabWeb.DbWork
 		{
 			adapter = new OleDbDataAdapter(sqlRequest, dbConnection);
 
+			dataSet = new DataSet();
+
 			adapter.Fill(dataSet, tableName);
 
 			return dataSet;

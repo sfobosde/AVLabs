@@ -27,7 +27,7 @@ namespace AVLabWeb.DbWork
 				var studentTable = GetDataSet(sqlRequest, "Студенты").Tables["Студенты"];
 
 				var linqQuery = from student in studentTable.AsEnumerable()
-								orderby student.ItemArray[1]
+								orderby student.ItemArray[2]
 								select student;
 
 				var studentList = new List<Student>();
@@ -38,7 +38,7 @@ namespace AVLabWeb.DbWork
 					{
 						StudentId = (int)student["Код студента"],
 						SurnameNP = (string)student["ФИО"],
-						GroupNum = (int)student["Группа"]
+						GroupNum = (string)student["Группа"]
 					});
 				}
 

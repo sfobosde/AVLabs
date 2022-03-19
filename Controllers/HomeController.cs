@@ -9,7 +9,7 @@ namespace AVLabWeb.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        //[HttpGet]
+        [HttpGet]
         public ActionResult Index()
         {
             return View();

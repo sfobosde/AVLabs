@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.OleDb;
+using System.Data;
 
 namespace AVLabWeb.DbWork
 {
@@ -17,7 +19,35 @@ namespace AVLabWeb.DbWork
 		/// <returns> Список студентов. </returns>
 		public override List<Student> GetStudentsList()
 		{
-			throw new NotImplementedException();
+			var sqlRequest = "SELECT * " +
+				"FROM Студенты";
+
+			try
+			{
+				var studentTable = GetDataSet(sqlRequest, "Студенты").Tables["Студенты"];
+
+				var linqQuery = from student in studentTable.AsEnumerable()
+								orderby student.ItemArray[1]
+								select student;
+
+				var studentList = new List<Student>();
+
+				foreach (var student in linqQuery)
+				{
+					studentList.Add(new Student()
+					{
+						StudentId = (int)student["Код студента"],
+						SurnameNP = (string)student["ФИО"],
+						GroupNum = (int)student["Группа"]
+					});
+				}
+
+				return studentList;
+			}
+			catch
+			{
+				return null;
+			}
 		}
 
 		/// <summary>
@@ -26,7 +56,7 @@ namespace AVLabWeb.DbWork
 		/// <param name="connectionString"> Строка подключения. </param>
 		public DbProvider(string connectionString) : base(connectionString)
 		{
-
+			
 		}
 	}
 }

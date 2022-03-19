@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.OleDb;
+using System.Data;
 
 namespace AVLabWeb.DbWork
 {
@@ -24,6 +25,16 @@ namespace AVLabWeb.DbWork
 		protected OleDbConnection dbConnection;
 
 		/// <summary>
+		/// Адаптер базы данных.
+		/// </summary>
+		protected OleDbDataAdapter adapter;
+
+		/// <summary>
+		/// Выборка данных от запроса.
+		/// </summary>
+		protected DataSet dataSet;
+
+		/// <summary>
 		/// Не реализовываем. Реализуем в прототипе.
 		/// </summary>
 		/// <returns> Список студентов. </returns>
@@ -38,6 +49,21 @@ namespace AVLabWeb.DbWork
 			this.connectionString = connectionString;
 
 			dbConnection = new OleDbConnection(connectionString);
+		}
+
+		/// <summary>
+		/// Получить набор данных по запросу.
+		/// </summary>
+		/// <param name="sqlRequest"> текст запроса. </param>
+		/// <param name="tableName"> Название тбалицы в датасете. </param>
+		/// <returns> Полученный запрос по датасету. </returns>
+		protected DataSet GetDataSet(string sqlRequest, string tableName)
+		{
+			adapter = new OleDbDataAdapter(sqlRequest, dbConnection);
+
+			adapter.Fill(dataSet, tableName);
+
+			return dataSet;
 		}
 	}
 }
